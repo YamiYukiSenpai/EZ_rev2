@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">EZ Tracker</string>
+
+    <string name="login_forgotPw">Forgot Your Password?</string>
+    <string name="login_signUp">Sign Up</string>
+    <string name="login_login">Login</string>
+    <string name="login_email">E-mail</string>
+    <string name="login_password">Password</string>
+    <string name="login_home">Login</string>
+    <string name="login_reset_password">Reset Password</string>
+    <string name="login_create_account">Create Account</string>
+
+
+    <string name="register_email">E-Mail *</string>
+    <string name="register_registration">Registration</string>
+    <string name="register_name">Name</string>
+    <string name="register_female">Female</string>
+    <string name="register_male">Male</string>
+    <string name="register_height_m">Height (m)</string>
+    <string name="register_weight_kg">Weight (kg)</string>
+    <string name="register_password">Password</string>
+    <string name="register_bday">Birthday (YYYY-MM-DD)</string>
+    <string name="home_title">EZ Tracker - Home</string>
+    <string name="home_weekly_steps">Weekly Steps</string>
+</resources>
