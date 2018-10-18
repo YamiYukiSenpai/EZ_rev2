@@ -26,4 +26,7 @@
     <string name="home_achievements">Goals</string>
     <string name="home_goalHint">Walk over 5000 steps for 30 days</string>
     <string name="home_phrase">Almost there! Keep it up!</string>
+    <string name="homemenu_quit">Quit</string>
+    <string name="homemenu_settings">Settings</string>
+    <string name="home_goalspercent">65%</string>
 </resources>

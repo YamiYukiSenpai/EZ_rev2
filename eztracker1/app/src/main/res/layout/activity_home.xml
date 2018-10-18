@@ -42,7 +42,7 @@
         android:text="@string/home_title"
         android:textAllCaps="true"
         android:textColor="#f7f7f7"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/homeBar"
         app:layout_constraintEnd_toEndOf="@+id/homeBar"
@@ -197,6 +197,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/homeSettings"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/settingsicon"
+        app:layout_constraintBottom_toBottomOf="@+id/homeBar"
+        app:layout_constraintEnd_toEndOf="@+id/homeBar"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/homeBar"
+        app:layout_constraintVertical_bias="0.47000003" />
+
+    <TextView
+        android:id="@+id/homegoalpercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/home_goalspercent"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.78" />
 
 
 </android.support.constraint.ConstraintLayout>

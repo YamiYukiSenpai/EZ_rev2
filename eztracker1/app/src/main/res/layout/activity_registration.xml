@@ -37,16 +37,19 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="36dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#f7f7f7"
         android:ems="10"
         android:hint="@string/register_email"
         android:inputType="textEmailAddress"
         android:textColor="#f7f7f7"
         android:textColorHint="#f7f7f7"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.050000012" />
 
     <TextView
         android:id="@+id/registerBar"
@@ -72,14 +75,14 @@
         android:text="@string/register_registration"
         android:textAllCaps="true"
         android:textColor="#f7f7f7"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/registerBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="@+id/registerBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/registerName"
