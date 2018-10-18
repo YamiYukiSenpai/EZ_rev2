@@ -22,4 +22,8 @@
     <string name="register_bday">Birthday (YYYY-MM-DD)</string>
     <string name="home_title">EZ Tracker - Home</string>
     <string name="home_weekly_steps">Weekly Steps</string>
+    <string name="home_daily_steps">Daily Steps</string>
+    <string name="home_achievements">Goals</string>
+    <string name="home_goalHint">Walk over 5000 steps for 30 days</string>
+    <string name="home_phrase">Almost there! Keep it up!</string>
 </resources>
