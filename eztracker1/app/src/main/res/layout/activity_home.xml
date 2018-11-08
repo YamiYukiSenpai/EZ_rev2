@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/homeBar"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="50sp"
         android:background="#afac0641"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

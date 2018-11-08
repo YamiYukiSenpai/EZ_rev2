@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ryan.myapplication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,18 +29,11 @@
         <activity
             android:name=".HomeActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-<<<<<<< HEAD
         <activity
-            android:name=".SettingsActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-=======
-        <activity android:name=".UpdateActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
-
-
-        </activity>
->>>>>>> caae5c2eee56ae8c21703bca874a2a275edebb88
+            android:name=".UpdateActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity android:name=".ViewDataActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
     </application>
 
 </manifest>
