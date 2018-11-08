@@ -1,5 +1,6 @@
 package com.example.ryan.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -28,12 +30,21 @@ public class HomeActivity extends AppCompatActivity {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(getApplicationContext(),
+                                item.getTitle(), Toast.LENGTH_SHORT).show();
                         switch(item.getItemId()){
                             case R.id.menuQuit:
                                 finishAndRemoveTask();
-                                return true;
+                                break;
+                                //return true;
+                            case R.id.menuSettings:
+                                Intent settings = new Intent(HomeActivity.this, SettingsActivity.class);
+                                startActivity(settings);
+                                break;
+                                //return true;
                         }
-                        return HomeActivity.super.onOptionsItemSelected(item);
+                        return true;
+                        //return HomeActivity.super.onOptionsItemSelected(item);
                     }
 
                 });
