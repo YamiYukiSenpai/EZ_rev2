@@ -18,9 +18,9 @@
     <string name="register_male">Male</string>
     <string name="register_height_m">Height (m)</string>
     <string name="register_weight_kg">Weight (kg)</string>
-    <string name="register_password">Password</string>
-    <string name="register_bday">Birthday (YYYY-MM-DD)</string>
-    <string name="home_title">EZ Tracker - Home</string>
+    <string name="register_password">Password *</string>
+    <string name="register_bday">Birthday (YYYY/MM/DD)</string>
+    <string name="home_title">Home</string>
     <string name="home_weekly_steps">Weekly Steps</string>
     <string name="home_daily_steps">Daily Steps</string>
     <string name="home_achievements">Goals</string>
@@ -29,4 +29,12 @@
     <string name="homemenu_quit">Quit</string>
     <string name="homemenu_settings">Settings</string>
     <string name="home_goalspercent">65%</string>
+    <string name="menu_sign_out">Sign Out</string>
+    <string name="indicates_a_required_field">* indicates a required field</string>
+    <string name="save_information">Save Information</string>
+    <string name="update_information">Update Information</string>
+    <string name="update_weight">Weight (kg)</string>
+    <string name="update_height">Height (m)</string>
+    <string name="birth_yyyymmdd">Birth (YYYY/MM/DD)</string>
+    <string name="welcome">Welcome Home</string>
 </resources>

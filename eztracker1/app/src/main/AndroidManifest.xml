@@ -24,8 +24,15 @@
         <activity
             android:name=".RegistrationActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".HomeActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".UpdateActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+
+
+        </activity>
     </application>
 
 </manifest>
