@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
     // private FirebaseDatabase database;
     // private DatabaseReference dbRef;
     private FirebaseAuth firebaseAuth;
@@ -48,6 +49,11 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserInformation ds = dataSnapshot.getValue(UserInformation.class);
+                showData(dataSnapshot);
+                name.setText("Welcome "+ds.getName());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 showData(dataSnapshot);
                 name.setText("Welcome "+ds.getName());
             }
@@ -115,6 +121,7 @@ public class HomeActivity extends AppCompatActivity {
             uInfo.setWeight(a.getValue(UserInformation.class).getWeight());
             uInfo.setHeight(a.getValue(UserInformation.class).getHeight());
             uInfo.setDob(a.getValue(UserInformation.class).getDob());
+            List<UserInformation> arraylist = new ArrayList<UserInformation>();
             List<UserInformation> arraylist = new ArrayList<UserInformation>();
             arraylist.add(uInfo);
         }

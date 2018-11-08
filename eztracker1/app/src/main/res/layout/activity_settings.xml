@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:text="@string/push_notifications"
         android:fontFamily="casual"
-        android:textColor="#f7f7f7"
+        android:textColor="@color/kinda_white"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginStart="8dp"
