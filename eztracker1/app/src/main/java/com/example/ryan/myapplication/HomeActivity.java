@@ -125,13 +125,6 @@ public class HomeActivity extends AppCompatActivity {
             uInfo.setWeight(a.getValue(UserInformation.class).getWeight());
             uInfo.setHeight(a.getValue(UserInformation.class).getHeight());
             uInfo.setDob(a.getValue(UserInformation.class).getDob());
-<<<<<<< HEAD
-            List<UserInformation> arraylist = new ArrayList<UserInformation>();
-=======
-
-            List<UserInformation> arraylist = new ArrayList<UserInformation>();
-
->>>>>>> f5e1312e2be4a757d8a3dbe33fbcc97d8370d10d
             List<UserInformation> arraylist = new ArrayList<UserInformation>();
             arraylist.add(uInfo);
         }
