@@ -27,6 +27,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
+    // private FirebaseDatabase database;
+    // private DatabaseReference dbRef;
+    private FirebaseAuth firebaseAuth;
+    // private FirebaseUser user;
+
+    //  private String userID;
+    // private TextView name;
+
    // private FirebaseDatabase database;
    // private DatabaseReference dbRef;
     private FirebaseAuth firebaseAuth;
@@ -49,6 +58,11 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserInformation ds = dataSnapshot.getValue(UserInformation.class);
+                showData(dataSnapshot);
+                name.setText("Welcome "+ds.getName());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 showData(dataSnapshot);
 
@@ -58,7 +72,6 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });*/
 
@@ -82,6 +95,8 @@ public class HomeActivity extends AppCompatActivity {
                                 return true;
                             case R.id.menuSettings:
                                 Toast.makeText(HomeActivity.this, "Settings Clicked", Toast.LENGTH_SHORT).show();
+                                Intent intent_settings = new Intent(HomeActivity.this, SettingsActivity.class);
+                                startActivity(intent_settings);
                                 return true;
                             case R.id.menuQuit:
                                 finishAndRemoveTask();
@@ -122,6 +137,7 @@ public class HomeActivity extends AppCompatActivity {
 
             List<UserInformation> arraylist = new ArrayList<UserInformation>();
 
+            List<UserInformation> arraylist = new ArrayList<UserInformation>();
             arraylist.add(uInfo);
         }
     }*/

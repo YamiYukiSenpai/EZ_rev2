@@ -1,6 +1,9 @@
 package com.example.ryan.myapplication;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceFragment;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,18 +17,22 @@ public class SettingsActivity extends AppCompatActivity {
 
     SharedPreferences shared_pref;
 
+    public static final String pref_name = "prefsFile";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        push_notif = (Switch)findViewById(R.id.push_Switch);
-        settings_back = (Button)findViewById(R.id.settings_back);
+        shared_pref = getApplicationContext().getSharedPreferences(pref_name, 0);
+
+        push_notif = findViewById(R.id.push_Switch);
+        settings_back = findViewById(R.id.settings_back);
 
         settings_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save_settings();
+                onBackPressed();
             }
         });
 
@@ -44,7 +51,16 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        //Intent back_home = new Intent(SettingsActivity.this, HomeActivity.class);
         save_settings();
         super.onBackPressed();
+    }
+
+    public static class SettingsFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.settings);
+        }
     }
 }
