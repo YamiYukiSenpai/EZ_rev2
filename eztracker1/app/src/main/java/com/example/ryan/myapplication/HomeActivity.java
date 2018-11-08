@@ -76,6 +76,8 @@ public class HomeActivity extends AppCompatActivity {
                                 return true;
                             case R.id.menuSettings:
                                 Toast.makeText(HomeActivity.this, "Settings Clicked", Toast.LENGTH_SHORT).show();
+                                Intent intent_settings = new Intent(HomeActivity.this, SettingsActivity.class);
+                                startActivity(intent_settings);
                                 return true;
                             case R.id.menuQuit:
                                 finishAndRemoveTask();
