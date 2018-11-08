@@ -23,12 +23,14 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if (firebaseAuth.getCurrentUser() != null){
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
+
                 } else {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
+
                 }
             }
         }, 1500);

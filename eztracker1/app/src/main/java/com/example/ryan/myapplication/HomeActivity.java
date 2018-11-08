@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
     // private FirebaseDatabase database;
     // private DatabaseReference dbRef;
     private FirebaseAuth firebaseAuth;
@@ -34,6 +35,14 @@ public class HomeActivity extends AppCompatActivity {
 
     //  private String userID;
     // private TextView name;
+
+   // private FirebaseDatabase database;
+   // private DatabaseReference dbRef;
+    private FirebaseAuth firebaseAuth;
+   // private FirebaseUser user;
+
+  //  private String userID;
+   // private TextView name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
        /* database = FirebaseDatabase.getInstance();
         dbRef =  database.getReference();
         name = findViewById(R.id.welcomeHome);
+
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -51,6 +61,15 @@ public class HomeActivity extends AppCompatActivity {
                 showData(dataSnapshot);
                 name.setText("Welcome "+ds.getName());
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                showData(dataSnapshot);
+
+                name.setText("Welcome "+ds.getName());
+            }
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -115,6 +134,9 @@ public class HomeActivity extends AppCompatActivity {
             uInfo.setWeight(a.getValue(UserInformation.class).getWeight());
             uInfo.setHeight(a.getValue(UserInformation.class).getHeight());
             uInfo.setDob(a.getValue(UserInformation.class).getDob());
+
+            List<UserInformation> arraylist = new ArrayList<UserInformation>();
+
             List<UserInformation> arraylist = new ArrayList<UserInformation>();
             arraylist.add(uInfo);
         }
