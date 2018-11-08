@@ -36,14 +36,6 @@ public class HomeActivity extends AppCompatActivity {
     //  private String userID;
     // private TextView name;
 
-   // private FirebaseDatabase database;
-   // private DatabaseReference dbRef;
-    private FirebaseAuth firebaseAuth;
-   // private FirebaseUser user;
-
-  //  private String userID;
-   // private TextView name;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +55,6 @@ public class HomeActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 showData(dataSnapshot);
 
                 name.setText("Welcome "+ds.getName());
@@ -134,9 +125,6 @@ public class HomeActivity extends AppCompatActivity {
             uInfo.setWeight(a.getValue(UserInformation.class).getWeight());
             uInfo.setHeight(a.getValue(UserInformation.class).getHeight());
             uInfo.setDob(a.getValue(UserInformation.class).getDob());
-
-            List<UserInformation> arraylist = new ArrayList<UserInformation>();
-
             List<UserInformation> arraylist = new ArrayList<UserInformation>();
             arraylist.add(uInfo);
         }

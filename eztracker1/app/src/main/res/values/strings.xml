@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">EZ Tracker</string>
-    <string name="app_name">EZ Tracker</string>
     <string name="login_forgotPw">Forgot Your Password?</string>
     <string name="login_signUp">Sign Up</string>
     <string name="login_login">Login</string>
@@ -10,8 +9,6 @@
     <string name="login_home">Login</string>
     <string name="login_reset_password">Reset Password</string>
     <string name="login_create_account">Create Account</string>
-
-
     <string name="register_email">E-Mail *</string>
     <string name="register_registration">Registration</string>
     <string name="register_name">Name</string>
