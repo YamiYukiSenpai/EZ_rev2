@@ -174,7 +174,7 @@
         android:backgroundTint="#f7f7f7"
         android:ems="10"
         android:hint="@string/update_height"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textColor="#f7f7f7"
         android:textColorHint="#f7f7f7"
         app:layout_constraintBottom_toBottomOf="parent"
