@@ -70,7 +70,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="@string/register_registration"
         android:textAllCaps="true"
         android:textColor="#f7f7f7"
@@ -98,10 +98,10 @@
         android:textColorHint="#f7f7f7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerRequirement"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.002" />
 
     <RadioGroup
         android:id="@+id/radioGroup2"
@@ -153,7 +153,7 @@
         android:backgroundTint="#f7f7f7"
         android:ems="10"
         android:hint="@string/update_weight"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textColor="#f7f7f7"
         android:textColorHint="#f7f7f7"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -174,7 +174,7 @@
         android:backgroundTint="#f7f7f7"
         android:ems="10"
         android:hint="@string/update_height"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textColor="#f7f7f7"
         android:textColorHint="#f7f7f7"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -223,10 +223,10 @@
 
     <Button
         android:id="@+id/registerBackButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/back"
+        android:background="@drawable/icarrow"
         app:layout_constraintBottom_toBottomOf="@+id/registerBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

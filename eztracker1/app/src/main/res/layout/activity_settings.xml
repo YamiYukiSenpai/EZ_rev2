@@ -34,10 +34,10 @@
 
     <Button
         android:id="@+id/settings_back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/back"
+        android:background="@drawable/icarrow"
         app:layout_constraintBottom_toBottomOf="@+id/settingsBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,7 +52,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="@string/settings"
         android:textAllCaps="true"
         android:textColor="@color/kinda_white"
@@ -60,8 +60,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/settingsBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
-        app:layout_constraintStart_toStartOf="@+id/settingsBar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/settings_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -72,15 +72,19 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="casual"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:switchPadding="50dp"
         android:text="@string/push_notifications"
         android:textColor="@color/kinda_white"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsBar" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsBar"
+        app:layout_constraintVertical_bias="0.07999998" />
 
     <Button
         android:id="@+id/aboutUs_button"
@@ -88,6 +92,7 @@
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="About Us"
         android:textSize="18sp"
@@ -95,7 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/push_Switch"
-        app:layout_constraintVertical_bias="0.22000003" />
+        app:layout_constraintVertical_bias="0.18" />
 
     <Button
         android:id="@+id/viewInfo_button"
@@ -111,7 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aboutUs_button"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/updateInfo_button"
@@ -127,6 +132,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewInfo_button"
-        app:layout_constraintVertical_bias="0.110000014" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
