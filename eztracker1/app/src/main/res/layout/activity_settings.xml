@@ -69,22 +69,18 @@
         android:id="@+id/push_Switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/push_notifications"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="casual"
+        android:text="@string/push_notifications"
         android:textColor="@color/kinda_white"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="139dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsBar"
-        app:layout_constraintVertical_bias="0.6"/>
+        app:layout_constraintTop_toBottomOf="@+id/settingsBar" />
 
     <Button
         android:id="@+id/aboutUs_button"
@@ -92,14 +88,14 @@
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="8dp"
         android:text="About Us"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/push_Switch"
-        app:layout_constraintVertical_bias="0.110000014"/>
+        app:layout_constraintVertical_bias="0.22000003" />
 
     <Button
         android:id="@+id/viewInfo_button"
@@ -107,14 +103,15 @@
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
         android:text="View Info"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aboutUs_button"
-        app:layout_constraintVertical_bias="0.110000014"/>
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <Button
         android:id="@+id/updateInfo_button"
@@ -122,13 +119,14 @@
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
         android:text="Update Info"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewInfo_button"
-        app:layout_constraintVertical_bias="0.110000014"/>
+        app:layout_constraintVertical_bias="0.110000014" />
 
 </android.support.constraint.ConstraintLayout>

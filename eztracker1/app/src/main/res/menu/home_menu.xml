@@ -6,14 +6,6 @@
         android:title="@string/homemenu_settings"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/menuUpdate"
-        android:title="Update Information"
-        app:showAsAction="never"/>
-
-    <item android:id="@+id/menuView"
-        android:title="View Information"
-        app:showAsAction="never"/>
-
     <item android:id="@+id/menuSignout"
         android:title="@string/menu_sign_out"
         app:showAsAction="never"/>

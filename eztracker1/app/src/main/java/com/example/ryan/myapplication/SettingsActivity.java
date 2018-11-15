@@ -14,6 +14,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     Switch push_notif;
     Button settings_back;
+    Button updateInfo;
+    Button viewInfo;
+    Button aboutUs;
 
     SharedPreferences shared_pref;
 
@@ -26,8 +29,38 @@ public class SettingsActivity extends AppCompatActivity {
 
         shared_pref = getApplicationContext().getSharedPreferences(pref_name, 0);
 
+        aboutUs = findViewById(R.id.aboutUs_button);
         push_notif = findViewById(R.id.push_Switch);
         settings_back = findViewById(R.id.settings_back);
+        updateInfo = findViewById(R.id.updateInfo_button);
+        viewInfo = findViewById(R.id.viewInfo_button);
+
+        aboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, AboutUsActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
+
+        updateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, UpdateActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
+
+        viewInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, ViewDataActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
 
         settings_back.setOnClickListener(new View.OnClickListener() {
             @Override

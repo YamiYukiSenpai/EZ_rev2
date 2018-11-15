@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +27,7 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ViewDataActivity extends AppCompatActivity {
@@ -39,7 +41,7 @@ public class ViewDataActivity extends AppCompatActivity {
     private TextView height;
     private TextView dob;
     private String userID;
-    private ListView mListView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +50,13 @@ public class ViewDataActivity extends AppCompatActivity {
 
         getDatabase();
         findAllViews();
+        showInfo();
 
         Button backButton = findViewById(R.id.viewBackButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ViewDataActivity.this, HomeActivity.class);
+                Intent intent = new Intent(ViewDataActivity.this, SettingsActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -65,7 +68,37 @@ public class ViewDataActivity extends AppCompatActivity {
         weight = findViewById(R.id.viewWeight);
         height = findViewById(R.id.viewHeight);
         dob = findViewById(R.id.viewDob);
-        mListView = findViewById(R.id.listview);
+
+    }
+
+    private void showInfo() {
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
+
+        DatabaseReference namer = FirebaseDatabase.getInstance().getReference(userID);
+
+        namer.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String realName = dataSnapshot.child("name").getValue(String.class);
+                String realWeight = dataSnapshot.child("weight").getValue(String.class);
+                String realHeight = dataSnapshot.child("weight").getValue(String.class);
+                String realdob = dataSnapshot.child("dob").getValue(String.class);
+
+                name.setText("Greetings, " + realName);
+                weight.setText("Weight: " + realWeight);
+                height.setText("Height: " + realHeight);
+                dob.setText("Date of Birth: " + realdob);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(ViewDataActivity.this, "Data unavailable, please try again later", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getDatabase() {

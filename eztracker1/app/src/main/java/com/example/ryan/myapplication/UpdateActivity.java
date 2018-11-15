@@ -50,7 +50,7 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 writeNewUser();
                 Toast.makeText(UpdateActivity.this, "Information Saved", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(UpdateActivity.this, HomeActivity.class);
+                Intent intent = new Intent(UpdateActivity.this, SettingsActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -63,6 +63,7 @@ public class UpdateActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 UserInformation userInfo = new UserInformation(name, height, weight, dob);
                 dbRef.child(user.getUid()).setValue(userInfo);
+
             }
         });
 
@@ -70,7 +71,7 @@ public class UpdateActivity extends AppCompatActivity {
         updateBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateActivity.this, HomeActivity.class);
+                Intent intent = new Intent(UpdateActivity.this, SettingsActivity.class);
                 finish();
                 startActivity(intent);
 
