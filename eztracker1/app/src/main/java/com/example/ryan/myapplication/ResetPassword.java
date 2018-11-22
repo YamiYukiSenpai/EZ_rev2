@@ -1,5 +1,6 @@
 package com.example.ryan.myapplication;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,9 +49,13 @@ public class ResetPassword extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(ResetPassword.this, "Email sent",
                                             Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(ResetPassword.this,
+                                            LoginActivity.class);
+                                    finish();
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(ResetPassword.this,
-                                            "Failed to send email", Toast.LENGTH_SHORT);
+                                            "Failed to send email", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
