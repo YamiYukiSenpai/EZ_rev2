@@ -37,10 +37,9 @@ public class ResetPassword extends AppCompatActivity {
         verify_email.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String email = reset_email.getText().toString().trim();
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Email field empty",
-                            Toast.LENGTH_SHORT).show();
-                }
+               /* if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(ResetPassword.this, "E-mail field empty", Toast.LENGTH_SHORT).show();
+                }*/
 
                 firebase_auth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -55,7 +54,7 @@ public class ResetPassword extends AppCompatActivity {
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(ResetPassword.this,
-                                            "Failed to send email", Toast.LENGTH_SHORT).show();
+                                            "E-mail does not exist", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

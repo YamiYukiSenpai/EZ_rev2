@@ -28,43 +28,40 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    // private FirebaseDatabase database;
-    // private DatabaseReference dbRef;
-    private FirebaseAuth firebaseAuth;
-    // private FirebaseUser user;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private FirebaseAuth mAuth;
+    private String userID;
 
-    //  private String userID;
-    // private TextView name;
+    private TextView name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-       /* database = FirebaseDatabase.getInstance();
-        dbRef =  database.getReference();
+        getDatabase();
+
+        //greeting
+        DatabaseReference namer = FirebaseDatabase.getInstance().getReference(userID);
         name = findViewById(R.id.welcomeHome);
 
-        dbRef.addValueEventListener(new ValueEventListener() {
+        namer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserInformation ds = dataSnapshot.getValue(UserInformation.class);
-                showData(dataSnapshot);
-                name.setText("Welcome "+ds.getName());
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                showData(dataSnapshot);
+                String realName = dataSnapshot.child("name").getValue(String.class);
+                name.setText("Welcome Home, " + realName);
 
-                name.setText("Welcome "+ds.getName());
-            }
+               // String
 
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
-        });*/
+        });
+
 
         //Popup Menu
         final Button settingsBtn = findViewById(R.id.homeSettings);
@@ -87,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
                                 finishAndRemoveTask();
                                 return true;
                             case R.id.menuSignout:
-                                firebaseAuth.signOut();
+                                mAuth.signOut();
                                 Toast.makeText(HomeActivity.this, "Signed Out", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                                 finish();
@@ -105,17 +102,18 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-/*
-    private void showData(DataSnapshot dataSnapshot) {
-        for (DataSnapshot a : dataSnapshot.getChildren()){
-            UserInformation uInfo = new UserInformation();
-            //userID = user.getUid();
-            uInfo.setName(a.getValue(UserInformation.class).getName());
-            uInfo.setWeight(a.getValue(UserInformation.class).getWeight());
-            uInfo.setHeight(a.getValue(UserInformation.class).getHeight());
-            uInfo.setDob(a.getValue(UserInformation.class).getDob());
-            List<UserInformation> arraylist = new ArrayList<UserInformation>();
-            arraylist.add(uInfo);
+    private void getDatabase() {
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
+
+        if (mAuth.getCurrentUser() == null) {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            finish();
+            startActivity(intent);
         }
-    }*/
+
+    }
 }
