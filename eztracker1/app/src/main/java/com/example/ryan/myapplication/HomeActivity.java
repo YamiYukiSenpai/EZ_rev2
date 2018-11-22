@@ -34,6 +34,16 @@ public class HomeActivity extends AppCompatActivity {
     private String userID;
 
     private TextView name;
+    private TextView mon;
+    private TextView tues;
+    private TextView weds;
+    private TextView thur;
+    private TextView fri;
+    private TextView sat;
+    private TextView sun;
+    private TextView goal;
+    private TextView current;
+    private TextView currentPercent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +51,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         getDatabase();
+        findViews();
 
-        //greeting
         DatabaseReference namer = FirebaseDatabase.getInstance().getReference(userID);
-        name = findViewById(R.id.welcomeHome);
+        DatabaseReference getSteps = namer.child("steps");
 
         namer.addValueEventListener(new ValueEventListener() {
             @Override
@@ -52,8 +62,14 @@ public class HomeActivity extends AppCompatActivity {
                 String realName = dataSnapshot.child("name").getValue(String.class);
                 name.setText("Welcome Home, " + realName);
 
-               // String
+                int realGoal = dataSnapshot.child("goalSteps").getValue(Integer.class);
+                goal.setText("Goal: " + realGoal);
 
+                int  realSteps = dataSnapshot.child("realSteps").getValue(Integer.class);
+                current.setText("Current Steps: " + realSteps);
+
+                int percentSteps = (int)(((double) realSteps / (double) realGoal) * 100.0);
+                currentPercent.setText("Percent Complete: " + percentSteps + "%");
             }
 
             @Override
@@ -62,6 +78,31 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        getSteps.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int realMonday = dataSnapshot.child("monday").getValue(Integer.class);
+                int realTuesday = dataSnapshot.child("tuesday").getValue(Integer.class);
+                int realWednesday = dataSnapshot.child("wednesday").getValue(Integer.class);
+                int realThursday = dataSnapshot.child("thursday").getValue(Integer.class);
+                int realFriday = dataSnapshot.child("friday").getValue(Integer.class);
+                int realSaturday = dataSnapshot.child("saturday").getValue(Integer.class);
+                int realSunday = dataSnapshot.child("sunday").getValue(Integer.class);
+
+                mon.setText("Monday: " + realMonday);
+                tues.setText("Tuesday: " + realTuesday);
+                weds.setText("Wednesday: " + realWednesday);
+                thur.setText("Thursday: " + realThursday);
+                fri.setText("Friday: " + realFriday);
+                sat.setText("Saturday: " + realSaturday);
+                sun.setText("Sunday: " + realSunday);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         //Popup Menu
         final Button settingsBtn = findViewById(R.id.homeSettings);
@@ -101,6 +142,22 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+    private void findViews(){
+        name = findViewById(R.id.welcomeHome);
+        mon = findViewById(R.id.home_monday);
+        tues = findViewById(R.id.home_Tuesday);
+        weds = findViewById(R.id.home_Wednesday);
+        thur = findViewById(R.id.home_thursday);
+        fri = findViewById(R.id.home_friday);
+        sat = findViewById(R.id.home_saturday);
+        sun = findViewById(R.id.home_sunday);
+
+        goal = findViewById(R.id.goalSteps);
+        current = findViewById(R.id.realSteps);
+        currentPercent = findViewById(R.id.percentSteps);
+    }
+
 
     private void getDatabase() {
         mAuth = FirebaseAuth.getInstance();

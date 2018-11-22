@@ -30,6 +30,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+
+    <EditText
+        android:id="@+id/registerName"
+        android:layout_width="283dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#f7f7f7"
+        android:ems="10"
+        android:hint="@string/register_name"
+        android:inputType="textPersonName"
+        android:textColor="#f7f7f7"
+        android:textColorHint="#f7f7f7"
+        app:layout_constraintBottom_toBottomOf="@+id/registerBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerBar"
+        app:layout_constraintVertical_bias="0.100000024" />
+
     <EditText
         android:id="@+id/registerEmail"
         android:layout_width="283dp"
@@ -82,44 +103,6 @@
         app:layout_constraintStart_toEndOf="@+id/registerBackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/registerName"
-        android:layout_width="283dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#f7f7f7"
-        android:ems="10"
-        android:hint="@string/register_name"
-        android:inputType="textPersonName"
-        android:textColor="#f7f7f7"
-        android:textColorHint="#f7f7f7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerRequirement"
-        app:layout_constraintVertical_bias="0.002" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="wrap_content"
-        android:layout_height="31dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerName"
-        app:layout_constraintVertical_bias="0.013">
-
-    </RadioGroup>
 
 
     <EditText
@@ -141,6 +124,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerEmail"
         app:layout_constraintVertical_bias="0.0" />
+
 
     <EditText
         android:id="@+id/registerWeight"
@@ -183,6 +167,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerWeight"
         app:layout_constraintVertical_bias="0.0" />
+
+
 
     <EditText
         android:id="@+id/registerDob"
