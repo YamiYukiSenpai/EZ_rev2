@@ -85,12 +85,12 @@ public class ViewDataActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String realName = dataSnapshot.child("name").getValue(String.class);
                 String realWeight = dataSnapshot.child("weight").getValue(String.class);
-                String realHeight = dataSnapshot.child("weight").getValue(String.class);
+                String realHeight = dataSnapshot.child("height").getValue(String.class);
                 String realdob = dataSnapshot.child("dob").getValue(String.class);
 
                 name.setText("Greetings, " + realName);
-                weight.setText("Weight: " + realWeight);
-                height.setText("Height: " + realHeight);
+                weight.setText("Weight: " + realWeight + " kg");
+                height.setText("Height: " + realHeight + " cm");
                 dob.setText("Date of Birth: " + realdob);
             }
 
