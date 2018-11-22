@@ -38,8 +38,10 @@
         <activity
             android:name=".ViewDataActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".AboutUsActivity"
+        <activity
+            android:name=".AboutUsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".ResetPassword"></activity>
     </application>
 
 </manifest>
