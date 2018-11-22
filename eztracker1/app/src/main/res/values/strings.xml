@@ -50,5 +50,6 @@
     <string name="RM">Ryan Maynard</string>
     <string name="JG">Jonas Gamao</string>
     <string name="verify_email">Verify Email</string>
+    <string name="reset_password">Reset Password</string>
 </resources>
 

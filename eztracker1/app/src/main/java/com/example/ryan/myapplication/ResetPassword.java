@@ -1,5 +1,6 @@
 package com.example.ryan.myapplication;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,8 +37,23 @@ public class ResetPassword extends AppCompatActivity {
             public void onClick(View v) {
                 String email = reset_email.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Email field empty").show();
+                    Toast.makeText(getApplicationContext(), "Email field empty",
+                            Toast.LENGTH_SHORT).show();
                 }
+
+                firebase_auth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(ResetPassword.this, "Email sent",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ResetPassword.this,
+                                            "Failed to send email", Toast.LENGTH_SHORT);
+                                }
+                            }
+                        });
             }
         });
     }
