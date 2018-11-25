@@ -28,43 +28,81 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    // private FirebaseDatabase database;
-    // private DatabaseReference dbRef;
-    private FirebaseAuth firebaseAuth;
-    // private FirebaseUser user;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private FirebaseAuth mAuth;
+    private String userID;
 
-    //  private String userID;
-    // private TextView name;
+    private TextView name;
+    private TextView mon;
+    private TextView tues;
+    private TextView weds;
+    private TextView thur;
+    private TextView fri;
+    private TextView sat;
+    private TextView sun;
+    private TextView goal;
+    private TextView current;
+    private TextView currentPercent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-       /* database = FirebaseDatabase.getInstance();
-        dbRef =  database.getReference();
-        name = findViewById(R.id.welcomeHome);
+        getDatabase();
+        findViews();
 
-        dbRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference namer = FirebaseDatabase.getInstance().getReference(userID);
+        DatabaseReference getSteps = namer.child("steps");
+
+        namer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserInformation ds = dataSnapshot.getValue(UserInformation.class);
-                showData(dataSnapshot);
-                name.setText("Welcome "+ds.getName());
+                String realName = dataSnapshot.child("name").getValue(String.class);
+                name.setText("Welcome Home, " + realName);
+
+                int realGoal = dataSnapshot.child("goalSteps").getValue(Integer.class);
+                goal.setText("Goal: " + realGoal);
+
+                int  realSteps = dataSnapshot.child("realSteps").getValue(Integer.class);
+                current.setText("Current Steps: " + realSteps);
+
+                int percentSteps = (int)(((double) realSteps / (double) realGoal) * 100.0);
+                currentPercent.setText("Percent Complete: " + percentSteps + "%");
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                showData(dataSnapshot);
 
-                name.setText("Welcome "+ds.getName());
             }
+        });
 
+        getSteps.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int realMonday = dataSnapshot.child("monday").getValue(Integer.class);
+                int realTuesday = dataSnapshot.child("tuesday").getValue(Integer.class);
+                int realWednesday = dataSnapshot.child("wednesday").getValue(Integer.class);
+                int realThursday = dataSnapshot.child("thursday").getValue(Integer.class);
+                int realFriday = dataSnapshot.child("friday").getValue(Integer.class);
+                int realSaturday = dataSnapshot.child("saturday").getValue(Integer.class);
+                int realSunday = dataSnapshot.child("sunday").getValue(Integer.class);
+
+                mon.setText("Monday: " + realMonday);
+                tues.setText("Tuesday: " + realTuesday);
+                weds.setText("Wednesday: " + realWednesday);
+                thur.setText("Thursday: " + realThursday);
+                fri.setText("Friday: " + realFriday);
+                sat.setText("Saturday: " + realSaturday);
+                sun.setText("Sunday: " + realSunday);
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
-        });*/
+        });
 
         //Popup Menu
         final Button settingsBtn = findViewById(R.id.homeSettings);
@@ -87,7 +125,7 @@ public class HomeActivity extends AppCompatActivity {
                                 finishAndRemoveTask();
                                 return true;
                             case R.id.menuSignout:
-                                firebaseAuth.signOut();
+                                mAuth.signOut();
                                 Toast.makeText(HomeActivity.this, "Signed Out", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                                 finish();
@@ -105,17 +143,34 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-/*
-    private void showData(DataSnapshot dataSnapshot) {
-        for (DataSnapshot a : dataSnapshot.getChildren()){
-            UserInformation uInfo = new UserInformation();
-            //userID = user.getUid();
-            uInfo.setName(a.getValue(UserInformation.class).getName());
-            uInfo.setWeight(a.getValue(UserInformation.class).getWeight());
-            uInfo.setHeight(a.getValue(UserInformation.class).getHeight());
-            uInfo.setDob(a.getValue(UserInformation.class).getDob());
-            List<UserInformation> arraylist = new ArrayList<UserInformation>();
-            arraylist.add(uInfo);
+    private void findViews(){
+        name = findViewById(R.id.welcomeHome);
+        mon = findViewById(R.id.home_monday);
+        tues = findViewById(R.id.home_Tuesday);
+        weds = findViewById(R.id.home_Wednesday);
+        thur = findViewById(R.id.home_thursday);
+        fri = findViewById(R.id.home_friday);
+        sat = findViewById(R.id.home_saturday);
+        sun = findViewById(R.id.home_sunday);
+
+        goal = findViewById(R.id.goalSteps);
+        current = findViewById(R.id.realSteps);
+        currentPercent = findViewById(R.id.percentSteps);
+    }
+
+
+    private void getDatabase() {
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
+
+        if (mAuth.getCurrentUser() == null) {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            finish();
+            startActivity(intent);
         }
-    }*/
+
+    }
 }

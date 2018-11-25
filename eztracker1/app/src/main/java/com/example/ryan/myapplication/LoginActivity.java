@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         Button login = findViewById(R.id.loginLogin);
         Button pwreset = findViewById(R.id.loginPwRest);
 
+
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         pwreset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, ResetPassword.class);
+                finish();
+                startActivity(intent);
             }
         });
 
