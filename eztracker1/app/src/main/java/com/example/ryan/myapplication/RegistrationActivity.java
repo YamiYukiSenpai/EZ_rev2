@@ -29,7 +29,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference dbRef;
     public String name;
-    private EditText editTextName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class RegistrationActivity extends AppCompatActivity {
         //find IDs
         Button registerAccount = findViewById(R.id.registerRegister);
         Button registerBack = findViewById(R.id.registerBackButton);
-
 
         firebaseAuth = FirebaseAuth.getInstance();
         dbRef = FirebaseDatabase.getInstance().getReference();
@@ -52,7 +50,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 EditText editTextPassword = findViewById(R.id.registerPassword);
                 String password = editTextPassword.getText().toString().trim();
-
 
 
                 if (TextUtils.isEmpty(email)) {
@@ -81,9 +78,18 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             UserInformation userInfo = new UserInformation(name, height, weight, dob);
 
-                            //UserInformation userInfo = new UserInformation(name, height, weight, dob);
-
                             dbRef.child(user.getUid()).setValue(userInfo);
+
+                            dbRef.child(user.getUid()).child("realSteps").setValue(0);
+                            dbRef.child(user.getUid()).child("goalSteps").setValue(0);
+
+                            dbRef.child(user.getUid()).child("steps").child("monday").setValue(0);
+                            dbRef.child(user.getUid()).child("steps").child("tuesday").setValue(0);
+                            dbRef.child(user.getUid()).child("steps").child("wednesday").setValue(0);
+                            dbRef.child(user.getUid()).child("steps").child("thursday").setValue(0);
+                            dbRef.child(user.getUid()).child("steps").child("friday").setValue(0);
+                            dbRef.child(user.getUid()).child("steps").child("saturday").setValue(0);
+                            dbRef.child(user.getUid()).child("steps").child("sunday").setValue(0);
 
                             Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);

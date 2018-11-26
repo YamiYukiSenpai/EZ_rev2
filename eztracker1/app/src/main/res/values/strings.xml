@@ -52,5 +52,15 @@
     <string name="verify_email">Verify Email</string>
     <string name="reset_password">Reset Password</string>
     <string name="app_bar_font">sans-serif-smallcaps</string>
+    <string name="homeactive_monday">monday</string>
+    <string name="home_tuesday">tuesday</string>
+    <string name="homewednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">sunday</string>
+    <string name="goal_steps">Goal</string>
+    <string name="current_steps">Current Steps</string>
+    <string name="percent_to_completion">Percent to Completion</string>
 </resources>
 

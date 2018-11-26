@@ -36,10 +36,15 @@ public class ResetPassword extends AppCompatActivity {
 
         verify_email.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String email = reset_email.getText().toString().trim();
-               /* if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(ResetPassword.this, "E-mail field empty", Toast.LENGTH_SHORT).show();
-                }*/
+
+                EditText editTextEmail = findViewById(R.id.reset_email);
+                final String email = editTextEmail.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(ResetPassword.this, "Please enter e-mail", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 firebase_auth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
