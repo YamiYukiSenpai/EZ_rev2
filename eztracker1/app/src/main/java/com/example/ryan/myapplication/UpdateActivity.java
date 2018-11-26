@@ -61,9 +61,12 @@ public class UpdateActivity extends AppCompatActivity {
                 String weight = editTextWeight.getText().toString().trim();
                 String dob = editTextDob.getText().toString().trim();
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                UserInformation userInfo = new UserInformation(name, height, weight, dob);
-                dbRef.child(user.getUid()).setValue(userInfo);
-
+                //UserInformation userInfo = new UserInformation(name, height, weight, dob);
+                dbRef.child(user.getUid()).child("name").setValue(name);
+                dbRef.child(user.getUid()).child("height").setValue(height);
+                dbRef.child(user.getUid()).child("weight").setValue(weight);
+                dbRef.child(user.getUid()).child("dob").setValue(dob);
+                //dbRef.child(user.getUid()).setValue(userInfo);
             }
         });
 
@@ -74,7 +77,6 @@ public class UpdateActivity extends AppCompatActivity {
                 Intent intent = new Intent(UpdateActivity.this, SettingsActivity.class);
                 finish();
                 startActivity(intent);
-
             }
         });
     }

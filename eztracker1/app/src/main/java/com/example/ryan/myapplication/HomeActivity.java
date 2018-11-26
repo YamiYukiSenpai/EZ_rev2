@@ -108,7 +108,7 @@ public class HomeActivity extends AppCompatActivity {
                 barChart.setPinchZoom(false);
                 barChart.setDoubleTapToZoomEnabled(false);
                 barChart.setDragEnabled(true);
-                barChart.setScaleEnabled(false);
+                barChart.setScaleEnabled(true);
                 barChart.getLegend().setEnabled(false);
                 barChart.getDescription().setEnabled(false);
                 barChart.getAxisLeft().setDrawLabels(false);
@@ -116,7 +116,6 @@ public class HomeActivity extends AppCompatActivity {
                 barChart.notifyDataSetChanged();
                 barChart.invalidate();
                 barChart.setBackgroundColor(Color.TRANSPARENT);
-
 
                 ArrayList<BarEntry> barEntries = new ArrayList<>();
 
@@ -154,7 +153,9 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                finish();
+                startActivity(intent);
             }
         });
 
@@ -238,6 +239,5 @@ public class HomeActivity extends AppCompatActivity {
             finish();
             startActivity(intent);
         }
-
     }
 }
