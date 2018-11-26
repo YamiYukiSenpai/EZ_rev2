@@ -16,13 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     private String userID;
 
     private BarChart barChart;
+    private PieChart goal_chart;
 
     private TextView name;
     private TextView mon;
@@ -57,6 +63,8 @@ public class HomeActivity extends AppCompatActivity {
     private TextView current;
     private TextView currentPercent;
 
+    int goal_steps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +72,6 @@ public class HomeActivity extends AppCompatActivity {
 
         getDatabase();
         findViews();
-
 
         DatabaseReference namer = FirebaseDatabase.getInstance().getReference(userID);
         DatabaseReference getSteps = namer.child("steps");
@@ -76,13 +83,13 @@ public class HomeActivity extends AppCompatActivity {
                 String realName = dataSnapshot.child("name").getValue(String.class);
                 name.setText("Welcome Home, " + realName);
 
-                int realGoal = dataSnapshot.child("goalSteps").getValue(Integer.class);
-                goal.setText("Goal: " + realGoal);
+                goal_steps = dataSnapshot.child("goalSteps").getValue(Integer.class);
+                goal.setText("Goal: " + goal_steps);
 
                 int  realSteps = dataSnapshot.child("realSteps").getValue(Integer.class);
                 current.setText("Current Steps: " + realSteps);
 
-                int percentSteps = (int)(((double) realSteps / (double) realGoal) * 100.0);
+                int percentSteps = (int)(((double) realSteps / (double) goal_steps) * 100.0);
                 currentPercent.setText("Percent Complete: " + percentSteps + "%");
             }
 
@@ -91,6 +98,8 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         getSteps.addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,6 +111,9 @@ public class HomeActivity extends AppCompatActivity {
                 float realFriday = dataSnapshot.child("friday").getValue(Integer.class);
                 float realSaturday = dataSnapshot.child("saturday").getValue(Integer.class);
                 float realSunday = dataSnapshot.child("sunday").getValue(Integer.class);
+
+                int total_steps = (int) (realMonday + realTuesday + realWednesday + realThursday +
+                        realFriday + realSaturday + realSunday);
 
                 barChart.setDrawBarShadow(false);
                 barChart.setDrawGridBackground(false);
@@ -116,6 +128,10 @@ public class HomeActivity extends AppCompatActivity {
                 barChart.notifyDataSetChanged();
                 barChart.invalidate();
                 barChart.setBackgroundColor(Color.TRANSPARENT);
+
+                goal_chart.setDrawHoleEnabled(true);
+                goal_chart.setTransparentCircleRadius(70f);
+                goal_chart.setHoleRadius(70f);
 
                 ArrayList<BarEntry> barEntries = new ArrayList<>();
 
@@ -148,6 +164,8 @@ public class HomeActivity extends AppCompatActivity {
                 xAxis.setDrawAxisLine(false);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 xAxis.setValueFormatter(new MyXAxisValueFormatter(days));
+
+                update_vsgoal(total_steps);
 
             }
 
@@ -212,6 +230,7 @@ public class HomeActivity extends AppCompatActivity {
         currentPercent = findViewById(R.id.percentSteps);
 
         barChart = findViewById(R.id.barChart);
+        goal_chart = findViewById(R.id.goal_pieChart);
     }
 
     public class MyXAxisValueFormatter implements IAxisValueFormatter{
@@ -239,5 +258,21 @@ public class HomeActivity extends AppCompatActivity {
             finish();
             startActivity(intent);
         }
+    }
+
+    private void update_vsgoal(int total_steps) {
+        ArrayList<PieEntry> goal_entries = new ArrayList<>();
+        ArrayList<String> pie_label = new ArrayList<>();
+
+        goal_entries.add(new PieEntry((float)total_steps, "Total"));
+        goal_entries.add(new PieEntry((float)goal_steps, "Goal"));
+
+        pie_label.add("Total");
+        pie_label.add("Goal");
+
+        PieDataSet data_set = new PieDataSet(goal_entries, "Weekly Goal");
+        PieData goal_data = new PieData(data_set);
+
+        goal_chart.setData(goal_data);
     }
 }
