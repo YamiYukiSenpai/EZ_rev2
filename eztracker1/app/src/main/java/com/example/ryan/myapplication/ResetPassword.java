@@ -12,11 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ResetPassword extends AppCompatActivity {
 
@@ -37,11 +33,11 @@ public class ResetPassword extends AppCompatActivity {
         verify_email.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                EditText editTextEmail = findViewById(R.id.reset_email);
-                final String email = editTextEmail.getText().toString().trim();
+                final String email = reset_email.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(ResetPassword.this, "Please enter e-mail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPassword.this, "Please enter e-mail",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -59,7 +55,8 @@ public class ResetPassword extends AppCompatActivity {
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(ResetPassword.this,
-                                            "E-mail does not exist", Toast.LENGTH_SHORT).show();
+                                            "E-mail does not exist", Toast.LENGTH_SHORT)
+                                            .show();
                                 }
                             }
                         });
