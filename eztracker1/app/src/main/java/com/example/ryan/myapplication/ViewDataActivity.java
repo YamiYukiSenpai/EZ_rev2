@@ -80,6 +80,7 @@ public class ViewDataActivity extends AppCompatActivity {
 
         DatabaseReference namer = FirebaseDatabase.getInstance().getReference(userID);
 
+
         namer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
