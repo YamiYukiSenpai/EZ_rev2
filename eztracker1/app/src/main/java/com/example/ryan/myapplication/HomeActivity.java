@@ -1,6 +1,7 @@
 package com.example.ryan.myapplication;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,15 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -32,6 +42,8 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
     private String userID;
+
+    private BarChart barChart;
 
     private TextView name;
     private TextView mon;
@@ -53,8 +65,10 @@ public class HomeActivity extends AppCompatActivity {
         getDatabase();
         findViews();
 
+
         DatabaseReference namer = FirebaseDatabase.getInstance().getReference(userID);
         DatabaseReference getSteps = namer.child("steps");
+
 
         namer.addValueEventListener(new ValueEventListener() {
             @Override
@@ -81,21 +95,61 @@ public class HomeActivity extends AppCompatActivity {
         getSteps.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int realMonday = dataSnapshot.child("monday").getValue(Integer.class);
-                int realTuesday = dataSnapshot.child("tuesday").getValue(Integer.class);
-                int realWednesday = dataSnapshot.child("wednesday").getValue(Integer.class);
-                int realThursday = dataSnapshot.child("thursday").getValue(Integer.class);
-                int realFriday = dataSnapshot.child("friday").getValue(Integer.class);
-                int realSaturday = dataSnapshot.child("saturday").getValue(Integer.class);
-                int realSunday = dataSnapshot.child("sunday").getValue(Integer.class);
+                float realMonday = dataSnapshot.child("monday").getValue(Integer.class);
+                float realTuesday = dataSnapshot.child("tuesday").getValue(Integer.class);
+                float realWednesday = dataSnapshot.child("wednesday").getValue(Integer.class);
+                float realThursday = dataSnapshot.child("thursday").getValue(Integer.class);
+                float realFriday = dataSnapshot.child("friday").getValue(Integer.class);
+                float realSaturday = dataSnapshot.child("saturday").getValue(Integer.class);
+                float realSunday = dataSnapshot.child("sunday").getValue(Integer.class);
 
-                mon.setText("Monday: " + realMonday);
-                tues.setText("Tuesday: " + realTuesday);
-                weds.setText("Wednesday: " + realWednesday);
-                thur.setText("Thursday: " + realThursday);
-                fri.setText("Friday: " + realFriday);
-                sat.setText("Saturday: " + realSaturday);
-                sun.setText("Sunday: " + realSunday);
+                barChart.setDrawBarShadow(false);
+                barChart.setDrawGridBackground(false);
+                barChart.setPinchZoom(false);
+                barChart.setDoubleTapToZoomEnabled(false);
+                barChart.setDragEnabled(true);
+                barChart.setScaleEnabled(false);
+                barChart.getLegend().setEnabled(false);
+                barChart.getDescription().setEnabled(false);
+                barChart.getAxisLeft().setDrawLabels(false);
+                barChart.getAxisRight().setDrawLabels(false);
+                barChart.notifyDataSetChanged();
+                barChart.invalidate();
+                barChart.setBackgroundColor(Color.TRANSPARENT);
+
+
+                ArrayList<BarEntry> barEntries = new ArrayList<>();
+
+                System.out.print(realMonday);
+
+                barEntries.add(new BarEntry(0,realMonday));
+                barEntries.add(new BarEntry(1,realTuesday));
+                barEntries.add(new BarEntry(2,realWednesday));
+                barEntries.add(new BarEntry(3,realThursday));
+                barEntries.add(new BarEntry(4,realFriday));
+                barEntries.add(new BarEntry(5,realSaturday));
+                barEntries.add(new BarEntry(6,realSunday));
+
+                BarDataSet dataSet = new BarDataSet(barEntries, "Steps Taken");
+                dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+                BarData barData = new BarData(dataSet);
+                barData.setValueTextColor(Color.WHITE);
+                barData.setValueTextSize(14f);
+
+
+                barChart.setData(barData);
+
+                String[] days = new String[] {"Mon","Tue","Wed","Thurs","Fri","Sat","Sun"};
+
+                XAxis xAxis = barChart.getXAxis();
+                xAxis.setTextSize(12f);
+                xAxis.setTextColor(Color.WHITE);
+                xAxis.setDrawGridLines(false);
+                xAxis.setDrawAxisLine(false);
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setValueFormatter(new MyXAxisValueFormatter(days));
+
             }
 
             @Override
@@ -140,7 +194,6 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
-
     }
 
     private void findViews(){
@@ -156,6 +209,20 @@ public class HomeActivity extends AppCompatActivity {
         goal = findViewById(R.id.goalSteps);
         current = findViewById(R.id.realSteps);
         currentPercent = findViewById(R.id.percentSteps);
+
+        barChart = findViewById(R.id.barChart);
+    }
+
+    public class MyXAxisValueFormatter implements IAxisValueFormatter{
+
+        private String[] mValues;
+        public MyXAxisValueFormatter(String[] values){
+            this.mValues = values;
+        }
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            return mValues[(int)value];
+        }
     }
 
 
