@@ -83,12 +83,12 @@ public class RegistrationActivity extends AppCompatActivity {
                             dbRef.child(user.getUid()).child("realSteps").setValue(0);
                             dbRef.child(user.getUid()).child("goalSteps").setValue(0);
 
-                            dbRef.child(user.getUid()).child("steps").child("monday").setValue(0);
-                            dbRef.child(user.getUid()).child("steps").child("tuesday").setValue(0);
-                            dbRef.child(user.getUid()).child("steps").child("wednesday").setValue(0);
+                            dbRef.child(user.getUid()).child("steps").child("monday").setValue(1500);
+                            dbRef.child(user.getUid()).child("steps").child("tuesday").setValue(4708);
+                            dbRef.child(user.getUid()).child("steps").child("wednesday").setValue(5487);
                             dbRef.child(user.getUid()).child("steps").child("thursday").setValue(0);
                             dbRef.child(user.getUid()).child("steps").child("friday").setValue(0);
-                            dbRef.child(user.getUid()).child("steps").child("saturday").setValue(0);
+                            dbRef.child(user.getUid()).child("steps").child("saturday").setValue(3354);
                             dbRef.child(user.getUid()).child("steps").child("sunday").setValue(0);
 
                             Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
