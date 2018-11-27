@@ -65,7 +65,11 @@ public class SettingsActivity extends AppCompatActivity {
         settings_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent (SettingsActivity.this, HomeActivity.class);
+                save_settings();
+                finish();
+                startActivity(intent);
+               // onBackPressed();
             }
         });
 
@@ -81,13 +85,13 @@ public class SettingsActivity extends AppCompatActivity {
     private void load_settings() {
         push_notif.setChecked(shared_pref.getBoolean("push_notif", false));
     }
-
+/*
     @Override
     public void onBackPressed() {
         //Intent back_home = new Intent(SettingsActivity.this, HomeActivity.class);
         save_settings();
         super.onBackPressed();
-    }
+    }*/
 
     public static class SettingsFragment extends PreferenceFragment {
         @Override

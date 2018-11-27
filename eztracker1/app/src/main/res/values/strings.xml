@@ -62,5 +62,10 @@
     <string name="goal_steps">Goal</string>
     <string name="current_steps">Current Steps</string>
     <string name="percent_to_completion">Percent to Completion</string>
+    <string name="weekly_goal">Weekly Goal</string>
+    <string name="set_goal_pop">Set</string>
+    <string name="set_goal">Set Goal</string>
+    <string name="save_goal_popper">Save Goal</string>
+    <string name="enter_goal_popper">Enter Goal</string>
 </resources>
 

@@ -12,23 +12,21 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ResetPassword extends AppCompatActivity {
 
     private EditText reset_email;
     private Button verify_email;
     private FirebaseAuth firebase_auth;
+    private Button backButn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
+        backButn = findViewById(R.id.reset_back);
         reset_email = findViewById(R.id.reset_email);
         verify_email = findViewById(R.id.reset_verify);
 
@@ -37,14 +35,13 @@ public class ResetPassword extends AppCompatActivity {
         verify_email.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                EditText editTextEmail = findViewById(R.id.reset_email);
-                final String email = editTextEmail.getText().toString().trim();
+                final String email = reset_email.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(ResetPassword.this, "Please enter e-mail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPassword.this, "Please enter e-mail",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
-
 
                 firebase_auth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -59,11 +56,22 @@ public class ResetPassword extends AppCompatActivity {
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(ResetPassword.this,
-                                            "E-mail does not exist", Toast.LENGTH_SHORT).show();
+                                            "E-mail does not exist", Toast.LENGTH_SHORT)
+                                            .show();
                                 }
                             }
                         });
             }
         });
+
+        backButn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResetPassword.this, LoginActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
+
     }
 }
