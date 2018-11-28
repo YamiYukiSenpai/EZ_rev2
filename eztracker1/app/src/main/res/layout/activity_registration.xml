@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerBar"
-        app:layout_constraintVertical_bias="0.120000005" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <EditText
         android:id="@+id/registerEmail"
@@ -197,15 +197,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="8dp"
         android:background="#ac0641"
         android:text="Register"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerBar"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintTop_toBottomOf="@+id/registerDob"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/registerBackButton"
