@@ -62,6 +62,8 @@ public class HomeActivity extends AppCompatActivity {
     int goal_steps;
     int total_steps;
 
+    int goal_steps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +91,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
+
         getSteps.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -99,6 +103,9 @@ public class HomeActivity extends AppCompatActivity {
                 float realFriday = dataSnapshot.child("friday").getValue(Integer.class);
                 float realSaturday = dataSnapshot.child("saturday").getValue(Integer.class);
                 float realSunday = dataSnapshot.child("sunday").getValue(Integer.class);
+
+                int total_steps = (int) (realMonday + realTuesday + realWednesday + realThursday +
+                        realFriday + realSaturday + realSunday);
 
                 barChart.setDrawBarShadow(false);
                 barChart.setDrawGridBackground(false);
@@ -118,6 +125,10 @@ public class HomeActivity extends AppCompatActivity {
                 barChart.setBackgroundColor(Color.TRANSPARENT);
                 barChart.animateY(1000,Easing.Linear);
                 barChart.getAxisLeft().setAxisMinimum(0f);
+
+                goal_chart.setDrawHoleEnabled(true);
+                goal_chart.setTransparentCircleRadius(70f);
+                goal_chart.setHoleRadius(70f);
 
                 ArrayList<BarEntry> barEntries = new ArrayList<>();
 
@@ -149,7 +160,6 @@ public class HomeActivity extends AppCompatActivity {
                 xAxis.setDrawAxisLine(false);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 xAxis.setValueFormatter(new MyXAxisValueFormatter(days));
-
 
                 total_steps = (int) (realMonday + realTuesday + realWednesday + realThursday +
                         realFriday + realSaturday + realSunday);
