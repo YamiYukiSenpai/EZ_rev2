@@ -62,8 +62,6 @@ public class HomeActivity extends AppCompatActivity {
     int goal_steps;
     int total_steps;
 
-    int goal_steps;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
