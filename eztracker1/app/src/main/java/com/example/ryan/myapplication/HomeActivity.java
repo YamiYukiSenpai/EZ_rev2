@@ -62,8 +62,6 @@ public class HomeActivity extends AppCompatActivity {
     int goal_steps;
     int total_steps;
 
-    int goal_steps;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,63 +77,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String realName = dataSnapshot.child("name").getValue(String.class);
-<<<<<<< HEAD
-<<<<<<< HEAD
-                name.setText("Welcome Home, " + realName);
-
-                goal_steps = dataSnapshot.child("goalSteps").getValue(Integer.class);
-                goal.setText("Goal: " + goal_steps);
-
-                int  realSteps = dataSnapshot.child("realSteps").getValue(Integer.class);
-                current.setText("Current Steps: " + realSteps);
-
-                int percentSteps = (int)(((double) realSteps / (double) goal_steps) * 100.0);
-                currentPercent.setText("Percent Complete: " + percentSteps + "%");
-||||||| merged common ancestors
-                name.setText("Welcome Home, " + realName);
-
-                int realGoal = dataSnapshot.child("goalSteps").getValue(Integer.class);
-                goal.setText("Goal: " + realGoal);
-
-                int  realSteps = dataSnapshot.child("realSteps").getValue(Integer.class);
-                current.setText("Current Steps: " + realSteps);
-
-                int percentSteps = (int)(((double) realSteps / (double) realGoal) * 100.0);
-                currentPercent.setText("Percent Complete: " + percentSteps + "%");
-=======
-||||||| merged common ancestors
-<<<<<<<<< Temporary merge branch 1
-                name.setText("Welcome Home, " + realName);
-
-                goal_steps = dataSnapshot.child("goalSteps").getValue(Integer.class);
-                goal.setText("Goal: " + goal_steps);
-
-                int  realSteps = dataSnapshot.child("realSteps").getValue(Integer.class);
-                current.setText("Current Steps: " + realSteps);
-
-                int percentSteps = (int)(((double) realSteps / (double) goal_steps) * 100.0);
-                currentPercent.setText("Percent Complete: " + percentSteps + "%");
-||||||||| merged common ancestors
-                name.setText("Welcome Home, " + realName);
-
-                int realGoal = dataSnapshot.child("goalSteps").getValue(Integer.class);
-                goal.setText("Goal: " + realGoal);
-
-                int  realSteps = dataSnapshot.child("realSteps").getValue(Integer.class);
-                current.setText("Current Steps: " + realSteps);
-
-                int percentSteps = (int)(((double) realSteps / (double) realGoal) * 100.0);
-                currentPercent.setText("Percent Complete: " + percentSteps + "%");
-=========
-=======
->>>>>>> 37999a954e54b83c4a95c1fbe7f45b90fe248ff3
                 name.setText(realName+ "'s Daily Steps");
-<<<<<<< HEAD
->>>>>>> d6f0fcdced478d60fd13a2456e4bc8d0cfc84a4a
-||||||| merged common ancestors
->>>>>>>>> Temporary merge branch 2
-=======
->>>>>>> 37999a954e54b83c4a95c1fbe7f45b90fe248ff3
             }
 
             @Override
@@ -217,22 +159,6 @@ public class HomeActivity extends AppCompatActivity {
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 xAxis.setValueFormatter(new MyXAxisValueFormatter(days));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                update_vsgoal(total_steps);
-
-||||||| merged common ancestors
-=======
-
-||||||| merged common ancestors
-<<<<<<<<< Temporary merge branch 1
-                update_vsgoal(total_steps);
-
-||||||||| merged common ancestors
-=========
-
-=======
->>>>>>> 37999a954e54b83c4a95c1fbe7f45b90fe248ff3
                 total_steps = (int) (realMonday + realTuesday + realWednesday + realThursday +
                         realFriday + realSaturday + realSunday);
 
@@ -278,12 +204,6 @@ public class HomeActivity extends AppCompatActivity {
                 goal_data.setValueTextSize(13f);
 
                 goal_chart.setData(goal_data);
-<<<<<<< HEAD
->>>>>>> d6f0fcdced478d60fd13a2456e4bc8d0cfc84a4a
-||||||| merged common ancestors
->>>>>>>>> Temporary merge branch 2
-=======
->>>>>>> 37999a954e54b83c4a95c1fbe7f45b90fe248ff3
             }
 
             @Override
@@ -351,27 +271,9 @@ public class HomeActivity extends AppCompatActivity {
         currentPercent = findViewById(R.id.percentSteps);
 
         barChart = findViewById(R.id.barChart);
-<<<<<<< HEAD
-<<<<<<< HEAD
-        goal_chart = findViewById(R.id.goal_pieChart);
-||||||| merged common ancestors
-=======
-||||||| merged common ancestors
-<<<<<<<<< Temporary merge branch 1
-        goal_chart = findViewById(R.id.goal_pieChart);
-||||||||| merged common ancestors
-=========
-=======
->>>>>>> 37999a954e54b83c4a95c1fbe7f45b90fe248ff3
         goal_chart = findViewById(R.id.goal_pieChart);
 
         goalButton = findViewById(R.id.goalButton);
-<<<<<<< HEAD
->>>>>>> d6f0fcdced478d60fd13a2456e4bc8d0cfc84a4a
-||||||| merged common ancestors
->>>>>>>>> Temporary merge branch 2
-=======
->>>>>>> 37999a954e54b83c4a95c1fbe7f45b90fe248ff3
     }
 
     public class MyXAxisValueFormatter implements IAxisValueFormatter{
