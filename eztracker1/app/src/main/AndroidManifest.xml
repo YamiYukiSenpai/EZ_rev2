@@ -42,7 +42,10 @@
             android:name=".AboutUsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".ResetPassword"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+
+        <activity android:name=".pop"
+            android:theme="@style/AppTheme.CustomTheme"></activity>
     </application>
 
 </manifest>

@@ -15,9 +15,11 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -52,16 +54,13 @@ public class HomeActivity extends AppCompatActivity {
     private PieChart goal_chart;
 
     private TextView name;
-    private TextView mon;
-    private TextView tues;
-    private TextView weds;
-    private TextView thur;
-    private TextView fri;
-    private TextView sat;
-    private TextView sun;
     private TextView goal;
     private TextView current;
     private TextView currentPercent;
+    private Button goalButton;
+
+    int goal_steps;
+    int total_steps;
 
     int goal_steps;
 
@@ -76,26 +75,19 @@ public class HomeActivity extends AppCompatActivity {
         DatabaseReference namer = FirebaseDatabase.getInstance().getReference(userID);
         DatabaseReference getSteps = namer.child("steps");
 
-
         namer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String realName = dataSnapshot.child("name").getValue(String.class);
-                name.setText("Welcome Home, " + realName);
-
-                goal_steps = dataSnapshot.child("goalSteps").getValue(Integer.class);
-                goal.setText("Goal: " + goal_steps);
-
-                int  realSteps = dataSnapshot.child("realSteps").getValue(Integer.class);
-                current.setText("Current Steps: " + realSteps);
-
-                int percentSteps = (int)(((double) realSteps / (double) goal_steps) * 100.0);
-                currentPercent.setText("Percent Complete: " + percentSteps + "%");
+                name.setText(realName+ "'s Daily Steps");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(HomeActivity.this, "Cannot Contact Server", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent (HomeActivity.this, LoginActivity.class);
+                finish();
+                startActivity(intent);
             }
         });
 
@@ -123,11 +115,16 @@ public class HomeActivity extends AppCompatActivity {
                 barChart.setScaleEnabled(true);
                 barChart.getLegend().setEnabled(false);
                 barChart.getDescription().setEnabled(false);
-                barChart.getAxisLeft().setDrawLabels(false);
+                barChart.getXAxis().setDrawGridLines(false);
+                barChart.getAxisLeft().setDrawGridLines(false);
+                barChart.getAxisRight().setDrawGridLines(false);
                 barChart.getAxisRight().setDrawLabels(false);
+                barChart.getAxisLeft().setTextColor(Color.WHITE);
                 barChart.notifyDataSetChanged();
                 barChart.invalidate();
                 barChart.setBackgroundColor(Color.TRANSPARENT);
+                barChart.animateY(1000,Easing.Linear);
+                barChart.getAxisLeft().setAxisMinimum(0f);
 
                 goal_chart.setDrawHoleEnabled(true);
                 goal_chart.setTransparentCircleRadius(70f);
@@ -152,7 +149,6 @@ public class HomeActivity extends AppCompatActivity {
                 barData.setValueTextColor(Color.WHITE);
                 barData.setValueTextSize(14f);
 
-
                 barChart.setData(barData);
 
                 String[] days = new String[] {"Mon","Tue","Wed","Thurs","Fri","Sat","Sun"};
@@ -165,13 +161,57 @@ public class HomeActivity extends AppCompatActivity {
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 xAxis.setValueFormatter(new MyXAxisValueFormatter(days));
 
-                update_vsgoal(total_steps);
+                total_steps = (int) (realMonday + realTuesday + realWednesday + realThursday +
+                        realFriday + realSaturday + realSunday);
 
+                ArrayList<PieEntry> goal_entries = new ArrayList<>();
+                ArrayList<String> pie_label = new ArrayList<>();
+
+                goal_chart.setDrawHoleEnabled(true);
+                goal_chart.setBackgroundColor(Color.TRANSPARENT);
+                goal_chart.setTransparentCircleRadius(40f);
+                goal_chart.setHoleRadius(40f);
+                goal_chart.setTouchEnabled(false);
+                goal_chart.notifyDataSetChanged();
+                goal_chart.invalidate();
+                goal_chart.setHoleColor(Color.TRANSPARENT);
+                goal_chart.getDescription().setEnabled(false);
+                goal_chart.animateY(1000,Easing.EaseInOutCubic);
+                goal_chart.getLegend().setEnabled(true);
+                goal_chart.getLegend().setTextColor(Color.WHITE);
+                goal_chart.getLegend().setTextSize(12f);
+                goal_chart.setDrawEntryLabels(false);
+
+                Legend l = goal_chart.getLegend();
+                l.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+
+                int goalDisplayer = dataSnapshot.child("goalSteps").getValue(Integer.class);
+                float goal_steps = dataSnapshot.child("goalSteps").getValue(Integer.class);
+                goal.setText("Goal: " + goalDisplayer);
+
+                goal_entries.add(new PieEntry((float)total_steps, "Total Steps"));
+                goal_entries.add(new PieEntry((goal_steps - total_steps), "Remaining Steps"));
+
+                int percentSteps = (int)(((double) total_steps / (double) goal_steps) * 100.0);
+                currentPercent.setText(percentSteps + "%");
+
+                pie_label.add("Total");
+                pie_label.add("Goal");
+
+                PieDataSet data_set = new PieDataSet(goal_entries, "");
+                PieData goal_data = new PieData(data_set);
+
+                data_set.setColors(ColorTemplate.JOYFUL_COLORS);
+                goal_data.setValueTextColor(Color.WHITE);
+                goal_data.setValueTextSize(13f);
+
+                goal_chart.setData(goal_data);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                Toast.makeText(HomeActivity.this, "Cannot connect to server.", Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(intent);
             }
@@ -192,9 +232,11 @@ public class HomeActivity extends AppCompatActivity {
                         switch(item.getItemId()){
                             case R.id.menuSettings:
                                 Intent intent_settings = new Intent(HomeActivity.this, SettingsActivity.class);
+                                finish();
                                 startActivity(intent_settings);
                                 return true;
                             case R.id.menuQuit:
+                                finish();
                                 finishAndRemoveTask();
                                 return true;
                             case R.id.menuSignout:
@@ -213,24 +255,27 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
+
+        goalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, pop.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void findViews(){
         name = findViewById(R.id.welcomeHome);
-        mon = findViewById(R.id.home_monday);
-        tues = findViewById(R.id.home_Tuesday);
-        weds = findViewById(R.id.home_Wednesday);
-        thur = findViewById(R.id.home_thursday);
-        fri = findViewById(R.id.home_friday);
-        sat = findViewById(R.id.home_saturday);
-        sun = findViewById(R.id.home_sunday);
-
-        goal = findViewById(R.id.goalSteps);
-        current = findViewById(R.id.realSteps);
+        goal = findViewById(R.id.goal_steps);
         currentPercent = findViewById(R.id.percentSteps);
 
         barChart = findViewById(R.id.barChart);
         goal_chart = findViewById(R.id.goal_pieChart);
+
+        goalButton = findViewById(R.id.goalButton);
     }
 
     public class MyXAxisValueFormatter implements IAxisValueFormatter{
@@ -245,7 +290,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
     private void getDatabase() {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -258,21 +302,5 @@ public class HomeActivity extends AppCompatActivity {
             finish();
             startActivity(intent);
         }
-    }
-
-    private void update_vsgoal(int total_steps) {
-        ArrayList<PieEntry> goal_entries = new ArrayList<>();
-        ArrayList<String> pie_label = new ArrayList<>();
-
-        goal_entries.add(new PieEntry((float)total_steps, "Total"));
-        goal_entries.add(new PieEntry((float)goal_steps, "Goal"));
-
-        pie_label.add("Total");
-        pie_label.add("Goal");
-
-        PieDataSet data_set = new PieDataSet(goal_entries, "Weekly Goal");
-        PieData goal_data = new PieData(data_set);
-
-        goal_chart.setData(goal_data);
     }
 }

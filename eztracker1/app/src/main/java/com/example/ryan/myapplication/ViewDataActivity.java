@@ -89,7 +89,7 @@ public class ViewDataActivity extends AppCompatActivity {
                 String realHeight = dataSnapshot.child("height").getValue(String.class);
                 String realdob = dataSnapshot.child("dob").getValue(String.class);
 
-                name.setText("Greetings, " + realName);
+                name.setText("Name: " + realName);
                 weight.setText("Weight: " + realWeight + " kg");
                 height.setText("Height: " + realHeight + " cm");
                 dob.setText("Date of Birth: " + realdob);
