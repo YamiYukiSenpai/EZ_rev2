@@ -19,12 +19,14 @@ public class ResetPassword extends AppCompatActivity {
     private EditText reset_email;
     private Button verify_email;
     private FirebaseAuth firebase_auth;
+    private Button backButn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
+        backButn = findViewById(R.id.reset_back);
         reset_email = findViewById(R.id.reset_email);
         verify_email = findViewById(R.id.reset_verify);
 
@@ -40,7 +42,6 @@ public class ResetPassword extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
-
 
                 firebase_auth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -62,5 +63,15 @@ public class ResetPassword extends AppCompatActivity {
                         });
             }
         });
+
+        backButn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResetPassword.this, LoginActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
+
     }
 }

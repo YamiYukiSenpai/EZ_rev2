@@ -33,8 +33,8 @@ public class UpdateActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() == null){
-            finish();
             Intent intent = new Intent (UpdateActivity.this, LoginActivity.class);
+            finish();
             startActivity(intent);
         }
         dbRef = FirebaseDatabase.getInstance().getReference();

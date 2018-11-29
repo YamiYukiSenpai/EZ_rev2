@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
-                startActivity(intent);
                 finish();
+                startActivity(intent);
             }
         });
 
@@ -75,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     Toast.makeText(LoginActivity.this, "Successfully Logged In", Toast.LENGTH_SHORT).show();
-                                    startActivity(intent);
                                     finish();
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Incorrect E-mail or Password", Toast.LENGTH_SHORT).show();
                                 }
