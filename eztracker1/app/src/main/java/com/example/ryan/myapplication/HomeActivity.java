@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -58,14 +61,31 @@ public class HomeActivity extends AppCompatActivity {
     private TextView current;
     private TextView currentPercent;
     private Button goalButton;
+    private Button nav_btn;
 
     int goal_steps;
     int total_steps;
+
+    NavigationView nav_view;
+    private DrawerLayout menu_drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        nav_btn = findViewById(R.id.homeNav);
+        menu_drawer = findViewById(R.id.drawer_layout);
+        nav_view = findViewById(R.id.nav_view);
+        nav_view.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        item.setChecked(true);
+                        menu_drawer.closeDrawers();
+                        return true;
+                    }
+                });
 
         getDatabase();
         findViews();
@@ -215,12 +235,17 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        //Popup Menu
-        final Button settingsBtn = findViewById(R.id.homeSettings);
-        settingsBtn.setOnClickListener(new View.OnClickListener() {
+        nav_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+
+            }
+        });
+
+        /*settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(HomeActivity.this, settingsBtn);
+                //PopupMenu popup = new PopupMenu(HomeActivity.this, settingsBtn);
 
                 popup.getMenuInflater().inflate(R.menu.home_menu, popup.getMenu());
 
@@ -252,7 +277,7 @@ public class HomeActivity extends AppCompatActivity {
                 popup.show();
             }
 
-        });
+        });*/
 
         goalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -300,5 +325,15 @@ public class HomeActivity extends AppCompatActivity {
             finish();
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                menu_drawer.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
