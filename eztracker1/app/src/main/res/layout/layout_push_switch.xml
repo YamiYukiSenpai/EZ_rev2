@@ -9,7 +9,7 @@
     android:gravity="bottom">
 
     <android.support.v7.widget.SwitchCompat
-        android:id="@+id/drawer_switch"
+        android:id="@+id/drawer_push_switch"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:text="Push Notification"/>
