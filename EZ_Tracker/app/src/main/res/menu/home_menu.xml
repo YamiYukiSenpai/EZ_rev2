@@ -13,5 +13,4 @@
     <item android:id="@+id/menuQuit"
         android:title="@string/homemenu_quit"
         app:showAsAction="never"/>
-
 </menu>

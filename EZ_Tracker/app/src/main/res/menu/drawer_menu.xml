@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_update_info"
+        android:title="Update Info" />
+    <item
+        android:id="@+id/nav_view_info"
+        android:title="View Info" />
+    <item
+        android:id="@+id/nav_about_us"
+        android:title="About Us" />
+    <item
+        android:id="@+id/nav_signout"
+        android:title="Sign Out" />
+
+</menu>

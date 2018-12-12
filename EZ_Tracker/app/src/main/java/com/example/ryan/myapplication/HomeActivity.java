@@ -243,7 +243,6 @@ public class HomeActivity extends AppCompatActivity {
                 });
                 popup.show();
             }
-
         });
 
         goalButton.setOnClickListener(new View.OnClickListener() {
