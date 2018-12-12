@@ -4,11 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.ryan.myapplication"
-<<<<<<< HEAD:eztracker1/app/build.gradle
         minSdkVersion 21
-=======
-        minSdkVersion 26
->>>>>>> 85ed7ed422eaf8b6cd4bf6e066237d7807d41bf5:EZ_Tracker/app/build.gradle
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"

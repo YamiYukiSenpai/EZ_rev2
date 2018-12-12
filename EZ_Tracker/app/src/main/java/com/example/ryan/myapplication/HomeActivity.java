@@ -1,26 +1,17 @@
 package com.example.ryan.myapplication;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,104 +58,14 @@ public class HomeActivity extends AppCompatActivity {
     private TextView current;
     private TextView currentPercent;
     private Button goalButton;
-    private Button nav_btn;
 
     int goal_steps;
     int total_steps;
-
-    NavigationView nav_view;
-    private DrawerLayout menu_drawer;
-    MenuItem about_us, update_info, view_info, signout;
-    Switch push_notif;
-
-    Toolbar toolbar;
-
-    SharedPreferences shared_pref;
-    public static final String pref_name = "prefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        toolbar = findViewById(R.id.homeBar);
-        setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-
-        shared_pref = getApplicationContext().getSharedPreferences(pref_name, 0);
-        about_us = findViewById(R.id.nav_about_us);
-        update_info = findViewById(R.id.nav_update_info);
-        view_info = findViewById(R.id.nav_view_info);
-        signout = findViewById(R.id.nav_signout);
-        push_notif = findViewById(R.id.drawer_push_switch);
-
-        nav_btn = findViewById(R.id.homeNav);
-        menu_drawer = findViewById(R.id.drawer_layout);
-        nav_view = findViewById(R.id.nav_view);
-        nav_view.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        item.setChecked(true);
-                        switch (item.getItemId()) {
-                            case R.id.nav_about_us:     // About Us
-                                Intent intent_about_us = new Intent(
-                                        HomeActivity.this, AboutUsActivity.class);
-                                finish();
-                                startActivity(intent_about_us);
-                                return true;
-                            case R.id.nav_update_info:
-                                Intent intent_update_info = new Intent(
-                                        HomeActivity.this, UpdateActivity.class);
-                                finish();
-                                startActivity(intent_update_info);
-                                return true;
-                            case R.id.nav_view_info:
-                                Intent intent_view_info = new Intent(
-                                        HomeActivity.this, ViewDataActivity.class);
-                                finish();
-                                startActivity(intent_view_info);
-                                return true;
-                            case R.id.nav_signout:
-                                mAuth.signOut();
-                                Toast.makeText(HomeActivity.this, "Signed Out",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(
-                                        HomeActivity.this, LoginActivity.class);
-                                finish();
-                                startActivity(intent);
-                                return true;
-                        }
-                        menu_drawer.closeDrawers();
-                        return true;
-                    }
-                });
-
-        menu_drawer.addDrawerListener(
-                new DrawerLayout.DrawerListener() {
-                    @Override
-                    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-
-                    }
-
-                    @Override
-                    public void onDrawerOpened(@NonNull View drawerView) {
-                        //load_settings();
-                    }
-
-                    @Override
-                    public void onDrawerClosed(@NonNull View drawerView) {
-                        //save_settings();
-                    }
-
-                    @Override
-                    public void onDrawerStateChanged(int newState) {
-
-                    }
-                }
-        );
 
         getDatabase();
         findViews();
@@ -306,17 +207,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        nav_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-
-            }
-        });
-
-        /*settingsBtn.setOnClickListener(new View.OnClickListener() {
+        //Popup Menu
+        final Button settingsBtn = findViewById(R.id.homeSettings);
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //PopupMenu popup = new PopupMenu(HomeActivity.this, settingsBtn);
+                PopupMenu popup = new PopupMenu(HomeActivity.this, settingsBtn);
 
                 popup.getMenuInflater().inflate(R.menu.home_menu, popup.getMenu());
 
@@ -347,8 +243,7 @@ public class HomeActivity extends AppCompatActivity {
                 });
                 popup.show();
             }
-
-        });*/
+        });
 
         goalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -395,35 +290,6 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             finish();
             startActivity(intent);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                menu_drawer.openDrawer(GravityCompat.START);
-                //load_settings();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void load_settings() {
-        push_notif.setChecked(shared_pref.getBoolean("push_notif", false));
-    }
-
-    private void save_settings() {
-        SharedPreferences.Editor settings_pref = shared_pref.edit();
-        settings_pref.putBoolean("push_notif", push_notif.isChecked());
-        settings_pref.commit();
-    }
-
-    public static class SettingsFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(@Nullable Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.settings);
         }
     }
 }

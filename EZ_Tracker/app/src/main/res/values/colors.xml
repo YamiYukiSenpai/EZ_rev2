@@ -3,10 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574b</color>
     <color name="colorAccent">#d81b60</color>
-    <color name="crimson_red">#afac0641</color>
-<<<<<<< HEAD:eztracker1/app/src/main/res/values/colors.xml
     <color name="kinda_white">#f7f7f7</color>
-=======
+    <color name="crimson_red">#afac0641</color>
     <color name="normal">#cdac0641</color>
->>>>>>> 85ed7ed422eaf8b6cd4bf6e066237d7807d41bf5:EZ_Tracker/app/src/main/res/values/colors.xml
+    <color name="normal">#cdac0641</color>
 </resources>
